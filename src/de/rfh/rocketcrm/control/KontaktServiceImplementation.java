@@ -1,4 +1,4 @@
-package de.rf.rocketcrm.control;
+package de.rfh.rocketcrm.control;
 
 public class KontaktServiceImplementation {
 
