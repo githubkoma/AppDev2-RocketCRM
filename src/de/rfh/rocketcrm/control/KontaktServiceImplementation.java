@@ -17,17 +17,16 @@ public class KontaktServiceImplementation implements KontaktService {
 		return k = dao.getKontakte();
 	}
 
-	public Kontakt getKontakt(Kontakt c) {
+	public Kontakt getKontakt(Kontakt k) {
+		return k = dao.getKontakt(k);
+	}
+
+	public Kontakt createKontakt(Kontakt k) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Kontakt createKontakt(Kontakt c) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Kontakt deleteKontakt(Kontakt c) {
+	public Kontakt deleteKontakt(Kontakt k) {
 		// TODO Auto-generated method stub
 		return null;
 	}

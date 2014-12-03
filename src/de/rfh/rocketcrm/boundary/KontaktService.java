@@ -7,8 +7,8 @@ public interface KontaktService {
 	//Kontakt[] Kontakte = new Kontakt[+1];
 	
 	Kontakt getKontakte();
-	Kontakt getKontakt(Kontakt c);
-	Kontakt createKontakt(Kontakt c);
-	Kontakt deleteKontakt(Kontakt c);
+	Kontakt getKontakt(Kontakt k);
+	Kontakt createKontakt(Kontakt k);
+	Kontakt deleteKontakt(Kontakt k);
 	
 }
