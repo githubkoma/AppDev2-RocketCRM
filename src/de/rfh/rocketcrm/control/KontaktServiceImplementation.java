@@ -1,4 +1,6 @@
 package de.rfh.rocketcrm.control;
+import java.util.ArrayList;
+import java.util.List;
 
 import de.rfh.rocketcrm.boundary.KontaktService;
 import de.rfh.rocketcrm.entity.*;
@@ -11,10 +13,10 @@ public class KontaktServiceImplementation implements KontaktService {
 		this.dao = KontaktDAOFactory.getKontakteDAO();
 	}
 	
-	public Kontakt getKontakte() {
+	public List<Kontakt> getKontakte() {
 		
-		Kontakt k = new Kontakt();		
-		return k = dao.getKontakte();
+		List<Kontakt> kontaktarray = new ArrayList<Kontakt>();
+		return kontaktarray = dao.getKontakte();
 	}
 
 	public Kontakt getKontakt(Kontakt k) {
