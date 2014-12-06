@@ -14,9 +14,9 @@ public class KontaktServiceTest {
 		
 		ks.ZeigeAlleKontakte();
 		
-		//Kontakt k = new Kontakt();
-		//k.setcId(6);
-		//ks.ZeigeEinenKontakt(k);
+		Kontakt k = new Kontakt();
+		k.setcId(6);
+		ks.ZeigeEinenKontakt(k);
 	}
 
 	private void ZeigeAlleKontakte() {

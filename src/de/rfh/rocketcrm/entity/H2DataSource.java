@@ -10,8 +10,10 @@ public class H2DataSource implements DataSource {
 	public String user = "sa";
 	public String pwd = "";
 	
+	private Connection myConnection;
+	
 	public Connection getConnection() {
-		Connection myConnection = null;
+		//Connection myConnection = null;
 		
 		try {
 			Class.forName(driver);
@@ -26,5 +28,16 @@ public class H2DataSource implements DataSource {
 		
 		return myConnection;
 	}
-
+	
+	public void doDisConnect()
+	{	
+		try
+		{
+			this.myConnection.close();
+			
+		} catch (SQLException e)
+			{
+				e.printStackTrace();
+			}
+	}
 }
