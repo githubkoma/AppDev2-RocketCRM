@@ -17,11 +17,11 @@ public class KontaktServiceTest {
 			
 		KontaktServiceTest ks = new KontaktServiceTest();
 		
-		// ks.ZeigeAlleKontakte();
+		ks.ZeigeAlleKontakte();
 		
-		Kontakt k = new Kontakt();
-		k.setcId(3);
-		ks.ZeigeEinenKontakt(k);
+		//Kontakt k = new Kontakt();
+		//k.setcId(88);
+		//ks.ZeigeEinenKontakt(k);
 	}
 
 	private void ZeigeAlleKontakte() {
