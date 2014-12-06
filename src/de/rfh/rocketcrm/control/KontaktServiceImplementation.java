@@ -13,14 +13,12 @@ public class KontaktServiceImplementation implements KontaktService {
 		this.dao = KontaktDAOFactory.getKontakteDAO();
 	}
 	
-	public List<Kontakt> getKontakte() {
-		
-		List<Kontakt> kontaktarray = new ArrayList<Kontakt>();
-		return kontaktarray = dao.getKontakte();
+	public List<?> getKontakte() {
+		return dao.getKontakte();
 	}
 
-	public Kontakt getKontakt(Kontakt k) {
-		return k = dao.getKontakt(k);
+	public List<?> getKontakt(Kontakt k) {
+		return dao.getKontakt(k);
 	}
 
 	public Kontakt createKontakt(Kontakt k) {
