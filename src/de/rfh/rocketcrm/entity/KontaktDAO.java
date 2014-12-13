@@ -5,8 +5,8 @@ import java.util.List;
 
 public interface KontaktDAO {
 	
-	List<?> getKontakte();
-	List<?> getKontakt(Kontakt c);
+	List<Kontakt> getKontakte();
+	Kontakt getKontakt(Kontakt c) throws Exception;
 	
 	Kontakt createKontakt(Kontakt c);
 	Kontakt deleteKontakt(Kontakt c);

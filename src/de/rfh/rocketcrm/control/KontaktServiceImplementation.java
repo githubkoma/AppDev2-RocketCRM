@@ -1,5 +1,5 @@
 package de.rfh.rocketcrm.control;
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.List;
 
 import de.rfh.rocketcrm.boundary.KontaktService;
@@ -7,17 +7,42 @@ import de.rfh.rocketcrm.entity.*;
 
 public class KontaktServiceImplementation implements KontaktService {
 
+	ErrorHandle oErrorHandler = new ErrorHandle();
+	
 	private KontaktDAO dao;	
 	
 	public KontaktServiceImplementation() {
 		this.dao = KontaktDAOFactory.getKontakteDAO();
 	}
 	
-	public List<?> getKontakte() {
+	public List<Kontakt> getKontakte() {
 		return dao.getKontakte();
 	}
 
-	public List<?> getKontakt(Kontakt k) {
+	public Kontakt getKontakt(Kontakt k) throws Exception {
+		
+		try {
+		  k = dao.getKontakt(k);
+		  
+		} 	catch (SQLException e) {
+			System.out.println("server - !!! SQLException !!!");
+		}
+			catch (Exception e) {
+				
+				// If Return-Value is Integer: Use our Handled Error-Messages, by errorID
+			    try { 
+			        int errorID = Integer.parseInt(e.getMessage());
+			        String errorMessage = oErrorHandler.getErrorMessage(errorID);
+			        System.out.println(errorMessage);
+			        
+			    // If not Integer, dont use our handled Errors -> Generic StackTrace Output    
+			    } catch(NumberFormatException eNumb) {
+			    	System.out.println("server - !!! Generic Exception !!!");
+			    	e.printStackTrace(); 
+			    }
+
+			}
+					
 		return dao.getKontakt(k);
 	}
 

@@ -12,24 +12,24 @@ public class H2DataSource implements DataSource {
 	
 	private Connection myConnection;
 	
-	public Connection getConnection() {
+	public Connection getConnection() throws Exception {
 		//Connection myConnection = null;
 		
-		try {
+		//try {
 			Class.forName(driver);
 			myConnection = DriverManager.getConnection(dbURL, user, pwd);
-		} catch (ClassNotFoundException e) {
+		//} catch (ClassNotFoundException e) {
+		//	// TODO Auto-generated catch block
+		//	e.printStackTrace();
+		//} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		//	e.printStackTrace();
+		//}
 		
 		return myConnection;
 	}
 	
-	public void doDisConnect()
+	public void doDisConnect() 
 	{	
 		try
 		{

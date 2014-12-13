@@ -1,4 +1,5 @@
 package de.rfh.rocketcrm.boundary;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -11,72 +12,59 @@ import de.rfh.rocketcrm.entity.Kontakt;
 
 public class KontaktServiceTest {
 	
-	ErrorHandle oErrorHandler = new ErrorHandle();
+	// ErrorHandle oErrorHandler = new ErrorHandle();
 	
 	public static void main(String[] args) {
 			
 		KontaktServiceTest ks = new KontaktServiceTest();
 		
-		ks.ZeigeAlleKontakte();
+		//ks.ZeigeAlleKontakte();
 		
-		//Kontakt k = new Kontakt();
-		//k.setcId(88);
-		//ks.ZeigeEinenKontakt(k);
+		Kontakt k = new Kontakt();
+		k.setcId(5);
+		try {		
+		ks.ZeigeEinenKontakt(k); 
+		} catch (Exception e) {
+			// System.out.println("client - !!! Generic Exception !!!");
+		}
 	}
 
 	private void ZeigeAlleKontakte() {
 		KontaktService service = new KontaktServiceImplementation();
-
-		List result = service.getKontakte();
-		
-		if ((int) result.get(0) == ErrorIDs.cOK) {
 	
-			List<Kontakt> kontaktarray = new ArrayList<Kontakt>();
-			kontaktarray = (List<Kontakt>) result.get(1);
+		List<Kontakt> kontaktarray = new ArrayList<Kontakt>();
+		kontaktarray = service.getKontakte();
+		
+		Kontakt k = new Kontakt();
+		String xAusgabe = ""; 
+		Iterator<Kontakt> iterator = kontaktarray.iterator();
+		while (iterator.hasNext()) {
 			
-			Kontakt k = new Kontakt();
-			String xAusgabe = ""; 
-			Iterator<Kontakt> iterator = kontaktarray.iterator();
-			while (iterator.hasNext()) {
-				
-				k = iterator.next();
-				
-				xAusgabe = Objects.toString(k.getcId());
-				xAusgabe += " ; ";
-				xAusgabe += k.getcNName();
-				xAusgabe += " ; ";
-				xAusgabe += k.getcVName();
-				// TODO: Restliche Felder ausgeben
-				
-				System.out.println(xAusgabe);			
-				
-			}
-
-		} else {
-			// ERROR ausgeben
+			k = iterator.next();
+			
+			xAusgabe = Objects.toString(k.getcId());
+			xAusgabe += " ; ";
+			xAusgabe += k.getcNName();
+			xAusgabe += " ; ";
+			xAusgabe += k.getcVName();
+			// TODO: Restliche Felder ausgeben
+			
+			System.out.println(xAusgabe);			
+			
 		}
 		
 	}
 		
-	private void ZeigeEinenKontakt(Kontakt k) {
+	private void ZeigeEinenKontakt(Kontakt k) throws Exception {
 		KontaktService service = new KontaktServiceImplementation();
 				
-		List result = service.getKontakt(k);
+		k = service.getKontakt(k);
 		
-		if ((int) result.get(0) == ErrorIDs.cOK) {
-		
-			k = (Kontakt) result.get(1);
-			
-			System.out.println(k.getcId());
-			System.out.println(k.getcNName());
-			System.out.println(k.getcVName());
-			// Restliche Felder ausgeben
-		
-		} else {
-			// ERROR ausgeben
-			System.out.println(oErrorHandler.getErrorMessage((int) result.get(0)));
-		}
-		
+		System.out.println("ID: " + k.getcId());
+		System.out.println("Nachname: " + k.getcNName());
+		System.out.println("Vorname: " + k.getcVName());
+		// Restliche Felder ausgeben
+
 	}
 	
 }

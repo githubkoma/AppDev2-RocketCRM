@@ -10,11 +10,7 @@ public class KontaktDAO2db implements KontaktDAO {
 	
 	private DataSource myDataSource = new H2DataSource();
 
-	public List<?> getKontakte() {
-		
-		// Rückgabestruktur initialisieren, mit Status=OK starten
-		List result = new ArrayList();
-		result.add(new Integer(0));
+	public List<Kontakt> getKontakte() {
 		
 		// Normales Array ist NICHT dynamisch erweiterbar, daher ArrayList
 		List<Kontakt> kontaktarray = new ArrayList<Kontakt>();
@@ -42,61 +38,48 @@ public class KontaktDAO2db implements KontaktDAO {
 					i++;
 					
 				}	
-				
-
-				result.add(1, kontaktarray);				
-				
+					
 			}  catch (SQLException e) {
 											
 				e.printStackTrace();
-				result.set(0, ErrorIDs.cNotOK);
+
 			}			
 				
 		}
 		
-		return result;	
+		return kontaktarray;	
 		
 	}
 
 		
-	public List<?> getKontakt(Kontakt k) 
+	public Kontakt getKontakt(Kontakt k) throws Exception
 	{
-				
-		// Rückgabestruktur initialisieren, mit Status=OK starten
-		List result = new ArrayList();
-		result.add(new Integer(0));
-		
+	
 		Connection myConnection = myDataSource.getConnection();
 
-		try {
-			String sql = "SELECT * FROM Kontakt WHERE CID = ?";
+		String sql = "SELECT * FROM Kontakt WHERE CID = ?";
 
-			PreparedStatement myStatement = myConnection.prepareStatement(sql);
-			myStatement.setLong(1, k.getcId());
-							
-			ResultSet myResultSet = myStatement.executeQuery();
-			// myResultSet.beforeFirst();
-			
-			if (myResultSet.next()) {
-			
-				k.setcId(myResultSet.getLong("CID"));
-				k.setcNName(myResultSet.getString("CNNAME"));
-				k.setcVName(myResultSet.getString("CVNAME"));
-			
-				result.add(1, k);
-				
-			} else {
-				result.set(0, ErrorIDs.cErrRecordNotFound);
-				
-			}				
-			
-		}  catch (SQLException e) {
-										
-			e.printStackTrace();
-			result.set(0, ErrorIDs.cNotOK);
-		}
+		PreparedStatement myStatement = myConnection.prepareStatement(sql);
+		myStatement.setLong(1, k.getcId());
+						
+		ResultSet myResultSet = myStatement.executeQuery();
+		// myResultSet.beforeFirst();
 		
-		return result;
+		// Datensatz vorhanden?
+		if (myResultSet.next()) {
+		
+			k.setcId(myResultSet.getLong("CID"));
+			k.setcNName(myResultSet.getString("CNNAME"));
+			k.setcVName(myResultSet.getString("CVNAME"));
+		
+		// Kein Datensatz vorhanden?
+		} else {
+			int errorID = ErrorIDs.cErrRecordNotFound;
+			String errorIDstring = String.valueOf(errorID) ;
+			throw new Exception(errorIDstring);					
+		}				
+		
+		return k;
 	}
 
 	public Kontakt createKontakt(Kontakt k) 
