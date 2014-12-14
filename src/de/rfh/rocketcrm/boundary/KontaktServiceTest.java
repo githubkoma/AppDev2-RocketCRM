@@ -18,53 +18,85 @@ public class KontaktServiceTest {
 			
 		KontaktServiceTest ks = new KontaktServiceTest();
 		
-		//ks.ZeigeAlleKontakte();
+		// ks.ZeigeAlleKontakte();
 		
 		Kontakt k = new Kontakt();
-		k.setcId(5);
-		try {		
+		k.setcId(6);
 		ks.ZeigeEinenKontakt(k); 
-		} catch (Exception e) {
-			// System.out.println("client - !!! Generic Exception !!!");
-		}
+			
+		//ks.ErstelleKontakt(k);
+		
+		//ks.LoescheKontakt(k);
+		
+		//ks.EditiereKontakt(k);
+		
 	}
 
 	private void ZeigeAlleKontakte() {
+	
 		KontaktService service = new KontaktServiceImplementation();
 	
 		List<Kontakt> kontaktarray = new ArrayList<Kontakt>();
-		kontaktarray = service.getKontakte();
+
+		try {		
+			kontaktarray = service.getKontakte();
 		
-		Kontakt k = new Kontakt();
-		String xAusgabe = ""; 
-		Iterator<Kontakt> iterator = kontaktarray.iterator();
-		while (iterator.hasNext()) {
+			Kontakt k = new Kontakt();
 			
-			k = iterator.next();
-			
-			xAusgabe = Objects.toString(k.getcId());
-			xAusgabe += " ; ";
-			xAusgabe += k.getcNName();
-			xAusgabe += " ; ";
-			xAusgabe += k.getcVName();
-			// TODO: Restliche Felder ausgeben
-			
-			System.out.println(xAusgabe);			
-			
+			String xAusgabe = ""; 
+			Iterator<Kontakt> iterator = kontaktarray.iterator();
+			while (iterator.hasNext()) {
+				
+				k = iterator.next();
+				
+				xAusgabe = Objects.toString(k.getcId());
+				xAusgabe += " ; ";
+				xAusgabe += k.getcNName();
+				xAusgabe += " ; ";
+				xAusgabe += k.getcVName();
+				// TODO: Restliche Felder ausgeben
+				
+				System.out.println(xAusgabe);			
+				
+			}
+		
+		// Just Print Error that was being handled in KontaktServiceImplementation
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 		
 	}
 		
-	private void ZeigeEinenKontakt(Kontakt k) throws Exception {
+	private void ZeigeEinenKontakt(Kontakt k) {
 		KontaktService service = new KontaktServiceImplementation();
-				
-		k = service.getKontakt(k);
-		
-		System.out.println("ID: " + k.getcId());
-		System.out.println("Nachname: " + k.getcNName());
-		System.out.println("Vorname: " + k.getcVName());
-		// Restliche Felder ausgeben
+			
+		try {	
+			k = service.getKontakt(k);
 
+			System.out.println("ID: " + k.getcId());
+			System.out.println("Nachname: " + k.getcNName());
+			System.out.println("Vorname: " + k.getcVName());
+			// Restliche Felder ausgeben
+		
+		// Just Print Error that was being handled in KontaktServiceImplementation
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+
+	}
+	
+	private void ErstelleKontakt(Kontakt k){
+		
+	}
+	
+	private void LoescheKontakt(Kontakt k){
+		
+	}
+	
+	private void EditiereKontakt(Kontakt k){
+		
 	}
 	
 }

@@ -17,6 +17,7 @@ public final class ErrorIDs {
 	public static int  cErrUndefClass		= 14;		
 	
 	//Datenbank und SQL Fehler
+	public static int  cErrSQL    			= 99;
 	public static int  cErrDBConnect    	= 100;
 	public static int  cErrDBClose          = 101;
 	public static int  cErrDBCharset    	= 102;

@@ -11,7 +11,7 @@ public class ErrorHandle {
             errorMessage = "Kein Fehler - 0";
             break;
         case 1:
-        	errorMessage = "Fehler - 1";
+        	errorMessage = "Allgemeiner Fehler - 1";
             break;
         
         // Weitere Fehlerfälle definieren
@@ -20,6 +20,14 @@ public class ErrorHandle {
         	errorMessage = "Fehler - 3 - RecordNotFound.";
         	break;
             
+        case 99:
+        	errorMessage = "Fehler - 99 - SQL Fehler.";
+        	break;
+        	
+        case 100:
+        	errorMessage = "Fehler - 100 - SQL Connect Fehler.";
+        	break;
+        	
         // Weitere Fehlerfälle definieren
         	
         default:

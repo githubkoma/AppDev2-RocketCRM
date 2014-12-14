@@ -10,7 +10,7 @@ public class KontaktDAO2db implements KontaktDAO {
 	
 	private DataSource myDataSource = new H2DataSource();
 
-	public List<Kontakt> getKontakte() {
+	public List<Kontakt> getKontakte() throws Exception {
 		
 		// Normales Array ist NICHT dynamisch erweiterbar, daher ArrayList
 		List<Kontakt> kontaktarray = new ArrayList<Kontakt>();
@@ -18,33 +18,25 @@ public class KontaktDAO2db implements KontaktDAO {
 		Connection myConnection = myDataSource.getConnection();
 		if  (myConnection != null) 
 		{
-			try 
+			String sql = "SELECT * FROM Kontakt";
+
+			PreparedStatement myStatement = myConnection.prepareStatement(sql);
+			ResultSet myResultSet = myStatement.executeQuery();				
+			
+			int i = 0;
+			while (myResultSet.next()) 
 			{
-				String sql = "SELECT * FROM Kontakt";
-
-				PreparedStatement myStatement = myConnection.prepareStatement(sql);
-				ResultSet myResultSet = myStatement.executeQuery();				
 				
-				int i = 0;
-				while (myResultSet.next()) 
-				{
-					
-					kontaktarray.add(new Kontakt());
-					
-					kontaktarray.get(i).setcId(myResultSet.getLong("CID"));
-					kontaktarray.get(i).setcNName(myResultSet.getString("CNNAME"));
-					kontaktarray.get(i).setcVName(myResultSet.getString("CVNAME"));
-							
-					i++;
-					
-				}	
-					
-			}  catch (SQLException e) {
-											
-				e.printStackTrace();
-
-			}			
+				kontaktarray.add(new Kontakt());
 				
+				kontaktarray.get(i).setcId(myResultSet.getLong("CID"));
+				kontaktarray.get(i).setcNName(myResultSet.getString("CNNAME"));
+				kontaktarray.get(i).setcVName(myResultSet.getString("CVNAME"));
+						
+				i++;
+				
+			}	
+					
 		}
 		
 		return kontaktarray;	
@@ -72,23 +64,31 @@ public class KontaktDAO2db implements KontaktDAO {
 			k.setcNName(myResultSet.getString("CNNAME"));
 			k.setcVName(myResultSet.getString("CVNAME"));
 		
-		// Kein Datensatz vorhanden?
+		// Kein Datensatz vorhanden? Error setzen, Exception werfen
 		} else {
 			int errorID = ErrorIDs.cErrRecordNotFound;
 			String errorIDstring = String.valueOf(errorID) ;
 			throw new Exception(errorIDstring);					
 		}				
 		
+		myConnection.close();
+		
 		return k;
 	}
 
-	public Kontakt createKontakt(Kontakt k) 
+	public Kontakt createKontakt(Kontakt k) throws Exception
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Kontakt deleteKontakt(Kontakt k) 
+	public Kontakt deleteKontakt(Kontakt k) throws Exception
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public Kontakt editKontakt(Kontakt k) throws Exception
 	{
 		// TODO Auto-generated method stub
 		return null;
