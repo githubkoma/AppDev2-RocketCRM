@@ -1,19 +1,27 @@
 package de.rfh.rocketcrm.control;
-import java.sql.SQLException;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import de.rfh.rocketcrm.boundary.KontaktService;
 import de.rfh.rocketcrm.entity.*;
 
-public class KontaktServiceImplementation implements KontaktService {
+import java.rmi.server.UnicastRemoteObject;
+
+
+public class KontaktServiceImplementation extends UnicastRemoteObject implements KontaktDAO {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	ErrorHandle oErrorHandler = new ErrorHandle();
 	
-	private KontaktDAO dao;	
+	public KontaktDAO dao;	
 	
-	public KontaktServiceImplementation() {
-		this.dao = KontaktDAOFactory.getKontakteDAO();
+	public KontaktServiceImplementation() throws Exception 
+	{
+		this.dao = KontaktDAOFactory.getKontakteDAO(1);   // <---  hier H2 (0) oder File (1)
 	}
 	
 	public List<Kontakt> getKontakte() throws Exception {
@@ -52,18 +60,24 @@ public class KontaktServiceImplementation implements KontaktService {
 
 	public Kontakt createKontakt(Kontakt k) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		k = dao.createKontakt(k);
+		
+		return k;
 	}
 
 	public Kontakt deleteKontakt(Kontakt k) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		k = dao.deleteKontakt(k);
+		
+		return k;
 	}
 	
 	
 	public Kontakt editKontakt(Kontakt k) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		k = dao.editKontakt(k);
+		
+		return k;
 	}
 	
 	// exceptionHandler: Decides which errorMessage is created, based on the exception Parameter,
@@ -95,10 +109,14 @@ public class KontaktServiceImplementation implements KontaktService {
 		
 		}
 		
-		return errorMessage;
-		
+		return errorMessage;	
 	}
-	
+	public String sayHello(String msg) throws Exception 
+	{
+		System.out.println("Server_Message_Implementation: " + msg);
+		msg = dao.sayHello(msg);
+		return msg;
+	} 
 }
 	
 

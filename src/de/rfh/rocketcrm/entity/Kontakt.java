@@ -1,7 +1,14 @@
 package de.rfh.rocketcrm.entity;
 
-public class Kontakt {
+import java.io.Serializable;
 
+public class Kontakt implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private long cId;
 	private String cCrtDate;
 	private String cCrtUser;
@@ -14,7 +21,7 @@ public class Kontakt {
 	private String cBirthDay;
 	private String cMail;
 	private String cPhone;
-	private String cVersion;
+	private long cVersion;
 	
 	public long getcId() {
 		return cId;
@@ -88,10 +95,10 @@ public class Kontakt {
 	public void setcPhone(String cPhone) {
 		this.cPhone = cPhone;
 	}
-	public String getcVersion() {
+	public long getcVersion() {
 		return cVersion;
 	}
-	public void setcVersion(String cVersion) {
+	public void setcVersion(long cVersion) {
 		this.cVersion = cVersion;
 	}	
 	

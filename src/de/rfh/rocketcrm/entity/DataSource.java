@@ -5,5 +5,5 @@ import java.sql.Connection;
 public interface DataSource {
 
 	Connection getConnection() throws Exception;
-	void doDisConnect();
+	void doDisConnect() throws Exception;	
 }

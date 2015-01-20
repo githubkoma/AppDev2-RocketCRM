@@ -12,6 +12,7 @@ public class H2DataSource implements DataSource {
 	
 	private Connection myConnection;
 	
+	@Override
 	public Connection getConnection() throws Exception {
 		//Connection myConnection = null;
 		
@@ -29,15 +30,9 @@ public class H2DataSource implements DataSource {
 		return myConnection;
 	}
 	
-	public void doDisConnect() 
+	@Override
+	public void doDisConnect() throws Exception
 	{	
-		try
-		{
 			this.myConnection.close();
-			
-		} catch (SQLException e)
-			{
-				e.printStackTrace();
-			}
 	}
 }

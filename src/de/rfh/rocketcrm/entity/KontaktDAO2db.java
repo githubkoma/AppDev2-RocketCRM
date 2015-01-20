@@ -4,8 +4,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.rfh.rocketcrm.entity.*;
-
 public class KontaktDAO2db implements KontaktDAO {
 	
 	private DataSource myDataSource = new H2DataSource();
@@ -39,14 +37,13 @@ public class KontaktDAO2db implements KontaktDAO {
 					
 		}
 		
+		myDataSource.doDisConnect();
 		return kontaktarray;	
-		
 	}
 
 		
 	public Kontakt getKontakt(Kontakt k) throws Exception
 	{
-	
 		Connection myConnection = myDataSource.getConnection();
 
 		String sql = "SELECT * FROM Kontakt WHERE CID = ?";
@@ -71,27 +68,49 @@ public class KontaktDAO2db implements KontaktDAO {
 			throw new Exception(errorIDstring);					
 		}				
 		
-		myConnection.close();
-		
+		myDataSource.doDisConnect();
 		return k;
 	}
 
 	public Kontakt createKontakt(Kontakt k) throws Exception
 	{
 		// TODO Auto-generated method stub
-		return null;
+		k.setcUpdtDate("2015-01-20");
+		k.setcCrtDate("2015-01-20");
+		k.setcUpdtUser("admin");
+		k.setcCrtUser("admin");
+		
+		//sql ausführen!
+		
+		return k;
 	}
 
 	public Kontakt deleteKontakt(Kontakt k) throws Exception
 	{
 		// TODO Auto-generated method stub
-		return null;
+		
+		//sql ausführen!
+		
+		return k;
 	}
 	
 	public Kontakt editKontakt(Kontakt k) throws Exception
 	{
 		// TODO Auto-generated method stub
-		return null;
+		k.setcUpdtDate("2015-01-20");
+		k.setcUpdtUser("admin");
+		
+		//sql ausführen!
+		
+		return k;
+	}
+
+	@Override
+	public String sayHello(String msg) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println("Server_Message_DAOdb: " + msg);
+		msg = "Hello Client! Your Message:" + msg; 
+		return msg;
 	}
 
 }
