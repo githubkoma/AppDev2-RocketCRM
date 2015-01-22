@@ -11,7 +11,7 @@ public class RocketServer
 	{
 		LocateRegistry.createRegistry(1099);
 		KontaktServiceImplementation impl = new KontaktServiceImplementation();
-		Naming.bind("rmi://localhost:1099/KontaktDAO", impl);
+		Naming.bind("rmi://localhost:1099/abc", impl);
 		
 		System.out.println("Server running!");	
 		

@@ -3,12 +3,13 @@ package de.rfh.rocketcrm.control;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.rfh.rocketcrm.boundary.KontaktService;
 import de.rfh.rocketcrm.entity.*;
 
 import java.rmi.server.UnicastRemoteObject;
 
 
-public class KontaktServiceImplementation extends UnicastRemoteObject implements KontaktDAO {
+public class KontaktServiceImplementation extends UnicastRemoteObject implements KontaktService {
 
 	/**
 	 * 

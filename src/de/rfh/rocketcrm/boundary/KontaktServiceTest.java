@@ -14,8 +14,6 @@ import de.rfh.rocketcrm.entity.KontaktDAO;
 
 public class KontaktServiceTest {
 	
-	// ErrorHandle oErrorHandler = new ErrorHandle();
-	
 	public static void main(String[] args) {
 		KontaktServiceTest ks = new KontaktServiceTest();
 		Kontakt k = new Kontakt();
@@ -73,12 +71,11 @@ public class KontaktServiceTest {
 	}
 
 	private void ZeigeAlleKontakte() throws Exception {
-		//KontaktDAO service = (KontaktDAO) Naming.lookup ("rmi://localhost:1099/KontaktDAO");
 		//KontaktService service = new KontaktServiceImplementation();
 	
 		List<Kontakt> kontaktarray = new ArrayList<Kontakt>();
 	
-		KontaktDAO service = (KontaktDAO) Naming.lookup ("rmi://localhost:1099/KontaktDAO");
+		KontaktService service = (KontaktService) Naming.lookup ("rmi://localhost:1099/abc");
 		
 		kontaktarray = service.getKontakte();
 	
@@ -103,7 +100,7 @@ public class KontaktServiceTest {
 		
 	private Kontakt ZeigeEinenKontakt(Kontakt k) throws Exception {
 		//KontaktService service = new KontaktServiceImplementation();
-		KontaktDAO service = (KontaktDAO) Naming.lookup ("rmi://localhost:1099/KontaktDAO");
+		KontaktService service = (KontaktService) Naming.lookup ("rmi://localhost:1099/abc");
 		
 		k = service.getKontakt(k);
 
@@ -117,7 +114,7 @@ public class KontaktServiceTest {
 	
 	private void ErstelleKontakt(Kontakt k) throws Exception {
 		//KontaktService service = new KontaktServiceImplementation();
-		KontaktDAO service = (KontaktDAO) Naming.lookup ("rmi://localhost:1099/KontaktDAO");
+		KontaktService service = (KontaktService) Naming.lookup ("rmi://localhost:1099/abc");
 		
 		k = service.createKontakt(k);
 		
@@ -130,7 +127,7 @@ public class KontaktServiceTest {
 	
 	private void LoescheKontakt(Kontakt k) throws Exception {
 		//KontaktService service = new KontaktServiceImplementation();
-		KontaktDAO service = (KontaktDAO) Naming.lookup ("rmi://localhost:1099/KontaktDAO");
+		KontaktService service = (KontaktService) Naming.lookup ("rmi://localhost:1099/abc");
 		
 		k = service.deleteKontakt(k);
 		
@@ -140,7 +137,7 @@ public class KontaktServiceTest {
 	
 	private void EditiereKontakt(Kontakt k) throws Exception{
 		//KontaktService service = new KontaktServiceImplementation();
-		KontaktDAO service = (KontaktDAO) Naming.lookup ("rmi://localhost:1099/KontaktDAO");
+		KontaktService service = (KontaktService) Naming.lookup ("rmi://localhost:1099/abc");
 		
 		k = service.editKontakt(k);
 		
@@ -150,7 +147,7 @@ public class KontaktServiceTest {
 	
 	private void sayHello() throws Exception
 	{
-		KontaktDAO service = (KontaktDAO) Naming.lookup ("rmi://localhost:1099/KontaktDAO");
+		KontaktService service = (KontaktService) Naming.lookup ("rmi://localhost:1099/abc");
 		String msg = service.sayHello("Hello Server !?");
 			
 		System.out.println(msg);

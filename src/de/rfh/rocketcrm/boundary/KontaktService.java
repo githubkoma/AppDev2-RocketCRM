@@ -1,9 +1,11 @@
-package de.rfh.rocketcrm.entity;
+package de.rfh.rocketcrm.boundary;
 
 import java.util.List;
 import java.rmi.Remote;
 
-public interface KontaktDAO {
+import de.rfh.rocketcrm.entity.Kontakt;
+
+public interface KontaktService extends Remote {
 	
 	List<Kontakt> getKontakte() throws Exception;
 	Kontakt getKontakt(Kontakt c) throws Exception;
